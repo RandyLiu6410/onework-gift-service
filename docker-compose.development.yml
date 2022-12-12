@@ -1,0 +1,42 @@
+version: "3.7"
+
+name: gift-service-dev
+
+services:
+  dev-gift-service-databse:
+    image: mongo
+    restart: always
+    ports:
+      - ${MONGODB_PORT}:27017
+    container_name: dev-one-work-gift-engine-db
+    environment:
+      MONGO_INITDB_DATABASE: one-work-gift-engine
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ACCESS_KEY}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_SECRET_KEY}
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  # dev-gift-service-client:
+  #   build:
+  #     context: .
+  #     dockerfile: ./client/Dockerfile.development
+  #   container_name: dev-one-work-gift-engine-client
+  #   ports:
+  #     - "3006:3006"
+  #   restart: always
+  #   env_file:
+  #     - .env.client.development
+
+  # dev-gift-service-server:
+  #   build:
+  #     context: .
+  #     dockerfile: ./server/Dockerfile.development
+  #   container_name: dev-one-work-gift-engine-server
+  #   ports:
+  #     - "3200:3200"
+  #     - "3201:3201"
+  #   restart: always
+  #   env_file:
+  #     - .env.server.development
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
