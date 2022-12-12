@@ -137,7 +137,7 @@ export const Main = React.memo<MainProps>(({ user, users }) => {
               handleTransferAmountChange(Number(e.target.value));
             }}
           />
-          <Button disabled={!transferable} onClick={submit}>
+          <Button disabled={!transferable} onClick={submit} fullWidth>
             轉帳
           </Button>
         </StyledTransferWrapper>

@@ -19,7 +19,6 @@ const darkTheme = createTheme({
 
 const StyledRoot = styled("div")(() => ({
   width: "100vw",
-  height: "100vh",
   display: "flex",
 }));
 
@@ -109,10 +108,34 @@ const App = React.memo(() => {
     await createRecord({ type: "Notify", from: user._id, msg });
   };
 
+  const [container, setContainer] = React.useState<HTMLDivElement>();
+
+  React.useEffect(() => {
+    const onResize = () => {
+      if (container) {
+        const windowsVH = window.innerHeight / 100;
+        container.style.setProperty("--vh", windowsVH + "px");
+      }
+    };
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [container]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <StyledRoot>
+      <StyledRoot
+        ref={(element) => {
+          setContainer(element ?? undefined);
+        }}
+        style={{
+          height: "calc(var(--vh, 1vh) * 100)", //Safari hack
+        }}
+      >
         <Layout
           user={user}
           logout={logout}
