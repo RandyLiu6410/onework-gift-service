@@ -46,8 +46,6 @@ services:
     restart: always
     env_file:
       - ./server/.env.production
-    depends_on:
-      - gift-service-minio1
     networks:
       - gift-net
 
