@@ -26,7 +26,7 @@ services:
       dockerfile: ./client/Dockerfile.production
     container_name: one-work-gift-engine-client
     ports:
-      - "3006:3006"
+      - "12252:12252"
     restart: always
     env_file:
       - ./client/.env.production
@@ -41,8 +41,8 @@ services:
       dockerfile: ./server/Dockerfile.production
     container_name: one-work-gift-engine-server
     ports:
-      - "3200:3200"
-      - "3201:3201"
+      - "12250:12250"
+      - "12251:12251"
     restart: always
     env_file:
       - ./server/.env.production

@@ -1,0 +1,13 @@
+FROM node:14.19.1
+
+RUN rm -rf ./client/node_modules
+
+COPY ./client ./client
+
+WORKDIR /client/
+
+RUN yarn
+
+EXPOSE 12252
+
+CMD yarn serve --port 12252

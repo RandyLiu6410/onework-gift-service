@@ -1,0 +1,15 @@
+FROM node:14.19.1
+
+RUN rm -rf ./client/node_modules
+
+COPY ./client ./client
+
+WORKDIR /client/
+
+RUN npm install -g serve
+
+RUN yarn
+
+EXPOSE 12252
+
+CMD yarn build && serve --cors -s dist -p 12252

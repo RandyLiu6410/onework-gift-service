@@ -1,0 +1,15 @@
+FROM node:14.19.1
+
+RUN rm -rf ./server/node_modules
+
+COPY ./server ./server
+
+WORKDIR /server/
+
+RUN rm -Rf ./.env*
+
+RUN yarn
+
+EXPOSE 12250 12251
+
+CMD yarn start:debug
