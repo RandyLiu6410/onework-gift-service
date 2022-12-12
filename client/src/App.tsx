@@ -20,6 +20,7 @@ const darkTheme = createTheme({
 const StyledRoot = styled("div")(() => ({
   width: "100vw",
   display: "flex",
+  overflow: "scroll",
 }));
 
 const App = React.memo(() => {
