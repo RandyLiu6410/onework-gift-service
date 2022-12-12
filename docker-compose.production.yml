@@ -16,7 +16,7 @@ services:
     command: mongod --dbpath /data/db --port 27017
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - /home/deploy/gift-service/db:/data/db
+      - /home/deploy/onework-gift-service/db:/data/db
     networks:
       - gift-net
 
@@ -46,6 +46,8 @@ services:
     restart: always
     env_file:
       - ./server/.env.production
+    depends_on:
+      - gift-service-database
     networks:
       - gift-net
 
